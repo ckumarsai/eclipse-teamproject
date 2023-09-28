@@ -1,0 +1,12 @@
+package com.innominds.main;
+
+public class Main {
+
+	public static void main(String[] args) {
+		System.out.println(" sai  airbnb");
+		System.out.println("anil");
+		System.out.println("Buddyy");
+
+	}
+
+}

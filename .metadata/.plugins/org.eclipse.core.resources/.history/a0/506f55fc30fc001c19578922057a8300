@@ -1,0 +1,21 @@
+package com.innominds.main;
+
+import java.sql.SQLException;
+
+/**
+ * This is the implementation of the main class to call all the helper methods
+ * @author schinthakunta1
+ *
+ */
+public class Main {
+	public static void main(String[] args) throws SQLException {
+		UserDetails ud = new UserDetails();
+//		ud.createUsersTable("users");
+//        ud.insertUsersTableValues("users");
+//        ud.createOwnerTable("Owner");
+//        ud.insertOwnerTableValues("Owner");
+      ud.createAppartmentsTable("Appartments0");
+      ud.insertAppartmentsTableValues("Appartments0");
+	}
+
+}

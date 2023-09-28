@@ -1,0 +1,15 @@
+package com.innominds.main;
+/**
+ * This is the implementation of the main class to call all the helper methods
+ * @author schinthakunta
+ *
+ */
+public class Main {
+	public static void main(String[] args) {
+		UserDetails ud = new UserDetails();
+		//ud.createTable("users");
+		ud.insertUsersTableValues("users");
+		ud.createRoomsTable("rooms");
+	}
+
+}

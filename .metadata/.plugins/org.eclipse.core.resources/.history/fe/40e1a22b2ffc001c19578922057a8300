@@ -1,0 +1,140 @@
+package com.innominds.main;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+/**
+ * This is the implementation of a class to create and insert and execute the sql queries in  different tables
+ * in SQL
+ * 
+ * @author schinthakuntas1
+ *
+ */
+public class UserDetails {
+	static final String DB_URL = "jdbc:mysql://localhost/saikumar";
+	static final String USER = "root";
+	static final String PASS = "saikumar123";
+
+	/**
+	 * This is the helper method to create users table
+	 * 
+	 * @param tablename
+	 */
+	public  void createUsersTable(String tablename) {
+		// Open a connection
+		try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				Statement stmt = conn.createStatement();) {
+			    String sql = "CREATE TABLE " + tablename + " (id int primary key,  firstname VARCHAR(255), "
+					+ " lastname VARCHAR(255), " + " Email VARCHAR(255), " + "Address VARCHAR(255), "
+					+ " Country_code VARCHAR(255)," + " Mobilenumber VARCHAR(255))";
+			    stmt.executeUpdate(sql);
+			    System.out.println("Created users table in given database...");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * This is the helper method to insert the values in users table
+	 * 
+	 * @param tablename
+	 */
+	public static void insertUsersTableValues(String tablename) {
+		try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				Statement stmt = conn.createStatement();) {
+			System.out.println("Inserting records into the table...");
+			String sql = "INSERT INTO " + tablename
+					+ " VALUES (1, 'sai', 'chinthakunta', 'saikumar@gmail.com','Hyderabad','+91','9392553226');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO " + tablename
+					+ " VALUES (2, 'yashwanth', 'yash', 'yashwanth@gmail.com','kurnool','+91','9365443634');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO " + tablename
+					+ " VALUES (3, 'anilkumar', 'yellapu', 'anil@gmail.com','karimnagar','+91','9876543210');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO " + tablename
+					+ " VALUES (5, 'ashok', 'gannarapu', 'ashok@gmail.com','siricilla','+91','9876548320');";
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * This is the helper method to create the Owners table
+	 * 
+	 * @param tablename
+	 */
+	public static void createOwnerTable(String tablename) {
+		// Open a connection
+		try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				Statement stmt = conn.createStatement();) {
+			String sql = "CREATE TABLE " + tablename + " (owner_id int primary key, " + "room_id int , "
+					+ " firstname VARCHAR(255), " + " lastname VARCHAR(255), " + " Email VARCHAR(255), "
+					+ "Address VARCHAR(255), " + " Mobilenumber VARCHAR(255))";
+			stmt.executeUpdate(sql);
+			System.out.println("Created  owner table in given database...");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * This is the helper method to insert the values into Owners table
+	 * 
+	 * @param tablename
+	 */
+	public static void insertOwnerTableValues(String tablename) {
+		try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				Statement stmt = conn.createStatement();) {
+			System.out.println("Inserting records into the owner table...");
+			String sqls = "INSERT INTO " + tablename
+					+ " VALUES (1, 101, 'hari', 'chinthala','hari@gmail.com','chennei','9565762239');";
+			stmt.executeUpdate(sqls);
+			sqls = "INSERT INTO " + tablename
+					+ " VALUES (4, 103, 'jayanth', 'jayan','jayanth@gmail.com','hyderabad','9565765689');";
+			stmt.executeUpdate(sqls);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	/*
+	 * This is the helper method to create the apartments table in the database
+	 */
+
+	public static void createAppartmentsTable(String tablename) throws SQLException {
+		
+				String sql = "CREATE TABLE " + tablename + " (Appartmentname varchar(255), " + "room_type varchar(255), " +  "room_id int , "
+					+ "price int, " + "published_at varchar(255), " + "location varchar(255),"
+					+ "owner_id int,"+"FOREIGN KEY(owner_id) REFERENCES owners(owner_id)," + "AC_facility VARCHAR(255), " + "total_bedrooms int," + "total_bathrooms int, " + "total_occupancy int, " + "total_occupied int)";
+				  System.out.println(sql);
+			  try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+					Statement stmt=conn.createStatement();){
+					stmt.executeUpdate(sql);
+					System.out.println("created  Appartments table in the given database");
+			}catch(SQLException e) {
+				e.printStackTrace();
+		}
+	}
+	
+	/*
+	 * This is the helper method to insert values into the Apartments table
+	 */
+	public static void insertAppartmentsTableValues(String tablename) {
+		try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				Statement stmt = conn.createStatement();){
+			System.out.println("Inserting records into the Appartments table...");
+			String sqla = "INSERT INTO " + tablename + " values ('greenhouse','2bhk',110,2000,'gtdhj','hyd',5,'yes',2,2,4,2)";
+			System.out.println(sqla);		
+			stmt.executeUpdate(sqla);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}
